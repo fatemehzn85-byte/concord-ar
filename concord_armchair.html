@@ -3,38 +3,76 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Concord Armchair - AR Viewer</title>
+  <title>Concord Armchair — AR Viewer</title>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f1ec;
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 24px 0 4px;
+      color: #3a2a20;
+    }
+
+    p.subtitle {
+      color: #8a7a6a;
+      margin-bottom: 20px;
+      font-size: 14px;
     }
 
     model-viewer {
       width: 100%;
-      height: 100vh;
-      --poster-color: transparent;
+      max-width: 700px;
+      height: 420px;
+      margin: 0 auto;
+      background: #eee6da;
     }
 
-    #android-ar-button,
-    #ios-ar-button {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ffffff;
-      color: #111111;
-      border-radius: 24px;
-      padding: 12px 24px;
+    .ar-buttons {
+      margin-top: 24px;
+    }
+
+    a.ar-btn {
+      display: inline-block;
+      width: 320px;
+      max-width: 85%;
+      margin: 8px auto;
+      padding: 14px 20px;
+      border-radius: 30px;
       font-size: 15px;
       text-decoration: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    a.android-btn {
+      background: #4a3325;
+      color: #ffffff;
+    }
+
+    a.ios-btn {
+      background: #ffffff;
+      color: #4a3325;
+      border: 1px solid #4a3325;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #9a8a7a;
+      padding: 0 20px;
     }
   </style>
 </head>
 <body>
+
+  <h1>Concord — صندلی چرم</h1>
+  <p class="subtitle">تست مقیاس واقعی و بارگذاری در AR</p>
 
   <model-viewer
     id="viewer"
@@ -52,26 +90,23 @@
   <!-- تصویر مخفی لازم برای فعال شدن صحیح iOS Quick Look -->
   <img id="ar-hidden-img" style="display:none;" src="concord_armchair.usdz" alt="">
 
-  <!-- دکمه‌ی AR اندروید: لینک مستقیم Scene Viewer با قفل مقیاس -->
-  <a id="android-ar-button"
-     href="intent://arvr.google.com/scene-viewer/1.0?file=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.glb&mode=ar_preferred&resizable=false#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.html;end;">
-    مشاهده در فضای شما
-  </a>
+  <div class="ar-buttons">
+    <a class="ar-btn android-btn"
+       href="intent://arvr.google.com/scene-viewer/1.0?file=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.glb&mode=ar_preferred&resizable=false#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.html;end;">
+      مشاهده در فضای واقعی (اندروید)
+    </a>
+    <br>
+    <a class="ar-btn ios-btn"
+       rel="ar"
+       href="concord_armchair.usdz#allowsContentScaling=0">
+      مشاهده در فضای واقعی (آیفون)
+    </a>
+  </div>
 
-  <!-- دکمه‌ی AR آیفون: لینک مستقیم Quick Look با قفل مقیاس -->
-  <a id="ios-ar-button"
-     rel="ar"
-     href="concord_armchair.usdz#allowsContentScaling=0">
-    مشاهده در فضای شما
-  </a>
-
-  <script>
-    // نمایش فقط دکمه‌ی مناسب بر اساس سیستم‌عامل کاربر
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-    document.getElementById('android-ar-button').style.display = isIOS ? 'none' : 'block';
-    document.getElementById('ios-ar-button').style.display = isIOS ? 'block' : 'none';
-  </script>
+  <p class="note">
+    این صفحه فقط از گوشی موبایل واقعی (اندروید یا آیفون) قابل استفاده‌ست — قبل از باز کردن روی گوشی، مطمئن شوید فایل‌های
+    concord_armchair.glb و concord_armchair.usdz کنار همین HTML آپلود شده‌اند.
+  </p>
 
 </body>
 </html>
