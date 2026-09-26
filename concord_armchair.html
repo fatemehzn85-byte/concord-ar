@@ -1,112 +1,128 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Concord Armchair — AR Viewer</title>
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f5f1ec;
-      text-align: center;
-      padding-bottom: 40px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Concord — صندلی چرم</title>
 
-    h1 {
-      font-size: 20px;
-      margin: 24px 0 4px;
-      color: #3a2a20;
-    }
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
-    p.subtitle {
-      color: #8a7a6a;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-    model-viewer {
-      width: 100%;
-      max-width: 700px;
-      height: 420px;
-      margin: 0 auto;
-      background: #eee6da;
-    }
+  body {
+    margin: 0;
+    font-family: Tahoma, "Segoe UI", sans-serif;
+    background: #f7f5f2;
+    color: #2a2a2a;
+    text-align: center;
+  }
 
-    .ar-buttons {
-      margin-top: 24px;
-    }
+  header {
+    padding: 18px 16px 10px;
+  }
 
-    a.ar-btn {
-      display: inline-block;
-      width: 320px;
-      max-width: 85%;
-      margin: 8px auto;
-      padding: 14px 20px;
-      border-radius: 30px;
-      font-size: 15px;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
+  h1 {
+    font-size: 20px;
+    margin: 0 0 4px;
+  }
 
-    a.android-btn {
-      background: #4a3325;
-      color: #ffffff;
-    }
+  p.subtitle {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+  }
 
-    a.ios-btn {
-      background: #ffffff;
-      color: #4a3325;
-      border: 1px solid #4a3325;
-    }
+  model-viewer {
+    width: 100%;
+    height: 65vh;
+    background-color: #eeeeee;
+    --poster-color: transparent;
+  }
 
-    .note {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #9a8a7a;
-      padding: 0 20px;
-    }
-  </style>
+  .ar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 16px;
+  }
+
+  .ar-button {
+    display: inline-block;
+    width: 85%;
+    max-width: 340px;
+    padding: 13px 0;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .ar-android {
+    background-color: #1a1a1a;
+    color: #fff;
+  }
+
+  .ar-ios {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    border: 1.5px solid #1a1a1a;
+  }
+
+  .note {
+    font-size: 12px;
+    color: #888;
+    padding: 0 20px 24px;
+    line-height: 1.7;
+  }
+</style>
 </head>
+
 <body>
 
+<header>
   <h1>Concord — صندلی چرم</h1>
-  <p class="subtitle">تست مقیاس واقعی و بارگذاری در AR</p>
+  <p class="subtitle">پیش‌نمایش سه‌بعدی و مشاهده واقعیت افزوده در فضای واقعی شما</p>
+</header>
 
-  <model-viewer
-    id="viewer"
-    src="concord_armchair.glb"
-    alt="Concord Armchair"
-    camera-controls
-    disable-zoom
-    camera-orbit="0deg 75deg 105%"
-    min-camera-orbit="auto 55deg auto"
-    max-camera-orbit="auto 100deg auto"
-    shadow-intensity="1"
-    exposure="1">
-  </model-viewer>
+<model-viewer
+  id="stick-boheme-viewer"
+  src="concord_armchair.glb"
+  ios-src="concord_armchair.usdz"
+  alt="Concord — صندلی چرم"
+  camera-controls
+  disable-zoom
+  camera-orbit="0deg 75deg auto"
+  min-camera-orbit="auto 55deg auto"
+  max-camera-orbit="auto 100deg auto"
+  shadow-intensity="1"
+  exposure="1"
+  ar-scale="fixed">
+</model-viewer>
 
-  <!-- تصویر مخفی لازم برای فعال شدن صحیح iOS Quick Look -->
-  <img id="ar-hidden-img" style="display:none;" src="concord_armchair.usdz" alt="">
+<div class="ar-buttons">
 
-  <div class="ar-buttons">
-    <a class="ar-btn android-btn"
-       href="intent://arvr.google.com/scene-viewer/1.0?file=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.glb&mode=ar_preferred&resizable=false#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.html;end;">
-      مشاهده در فضای واقعی (اندروید)
-    </a>
-    <br>
-    <a class="ar-btn ios-btn"
-       rel="ar"
-       href="concord_armchair.usdz#allowsContentScaling=0">
-      مشاهده در فضای واقعی (آیفون)
-    </a>
-  </div>
+  <a class="ar-button ar-android"
+     href="intent://arvr.google.com/scene-viewer/1.0?file=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.glb&mode=ar_preferred&resizable=false#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=https://fatemehzn85-byte.github.io/concord-ar/concord_armchair.html;end;">
+    مشاهده در واقعیت افزوده (اندروید)
+  </a>
 
-  <p class="note">
-    این صفحه فقط از گوشی موبایل واقعی (اندروید یا آیفون) قابل استفاده‌ست — قبل از باز کردن روی گوشی، مطمئن شوید فایل‌های
-    concord_armchair.glb و concord_armchair.usdz کنار همین HTML آپلود شده‌اند.
-  </p>
+  <a class="ar-button ar-ios"
+     rel="ar"
+     href="concord_armchair.usdz#allowsContentScaling=0">
+    <img style="display:none" src="concord_armchair.usdz">
+    مشاهده در واقعیت افزوده (آیفون)
+  </a>
+
+</div>
+
+<p class="note">
+  برای مشاهده واقعیت افزوده، این صفحه را از طریق گوشی موبایل (اندروید یا آیفون) باز کنید.
+  این قابلیت روی رایانه/دسکتاپ فعال نیست. ابعاد نمایش‌داده‌شده با اندازه واقعی محصول مطابقت دارد.
+</p>
 
 </body>
 </html>
