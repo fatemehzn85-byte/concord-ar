@@ -130,7 +130,6 @@
   var mv = document.querySelector('model-viewer');
   var btn = document.querySelector('.ar-android');
   if (!mv || !btn || !/Android/i.test(navigator.userAgent)) return;
-  var fallbackHref = btn.getAttribute('href');
   mv.setAttribute('ar', '');
   mv.setAttribute('ar-modes', 'webxr');
   var xr = false;
@@ -142,7 +141,7 @@
   btn.addEventListener('click', function(e){
     if (xr && mv.canActivateAR) {
       e.preventDefault();
-      try { mv.activateAR(); } catch (err) { location.href = fallbackHref; }
+      try { mv.activateAR(); } catch (err) { location.href = btn.getAttribute('href'); }
     }
   });
 })();
