@@ -171,19 +171,16 @@
    ===================================================================== */
 const IMAGES = [
   { src: "images/concord-01.jpg", caption: "Accent chair, side table and ottoman in a sunlit living corner", ratio: "1/1",
-    glb: "ar/setting-01.glb", usdz: "ar/setting-01.usdz",
     products: [
       { name: "Concord Accent Chair", url: "https://fatemehzn85-byte.github.io/concord-ar/concord_accent_chair.html", thumb: "" },
       { name: "Concord Side Table", url: "https://fatemehzn85-byte.github.io/concord-ar/concord_side_table.html", thumb: "" },
       { name: "Concord Style Completion", url: "https://fatemehzn85-byte.github.io/concord-ar/concord_style_completion.html", thumb: "" }
     ] },
   { src: "images/concord-02.jpg", caption: "Leather ottoman with a brass C-table, styled by the fireplace", ratio: "1/1",
-    glb: "ar/setting-02.glb", usdz: "ar/setting-02.usdz",
     products: [
       { name: "Concord Style Completion", url: "https://fatemehzn85-byte.github.io/concord-ar/concord_style_completion.html", thumb: "" }
     ] },
   { src: "images/concord-03.jpg", caption: "Two accent chairs in navy around a round coffee table", ratio: "1/1",
-    glb: "ar/setting-03.glb", usdz: "ar/setting-03.usdz",
     products: [
       { name: "Concord Accent Chair", url: "https://fatemehzn85-byte.github.io/concord-ar/concord_accent_chair.html", thumb: "" },
       { name: "Concord Coffee Table", url: "https://fatemehzn85-byte.github.io/concord-ar/concord_coffee_table.html", thumb: "" }
@@ -209,7 +206,7 @@ const IMAGES = [
 ];
 
 // Optional "View in your room" button (AR page). Leave "" to hide it.
-const AR_LINK = "concord_armchair.html";
+const AR_LINK = "";
 /* ===================================================================== */
 
 const $ = id => document.getElementById(id);
@@ -338,33 +335,6 @@ $("lb").addEventListener("pointerup", e => {
   const dx = e.clientX - sx; sx = null;
   if (Math.abs(dx) > 60) step(dx < 0 ? 1 : -1);
 });
-</script>
-<!-- AR Android: اول WebXR (داخل Chrome)، اگر نشد همان لینک Scene Viewer. آیفون دست‌نخورده است. -->
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-<model-viewer id="arMv" ar ar-modes="webxr" ar-scale="fixed" loading="eager" alt=""
-  style="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none"></model-viewer>
-<script>
-(function(){
-  if (!/Android/i.test(navigator.userAgent)) return;
-  var mv = document.getElementById('arMv');
-  var btn = document.getElementById('lbArAndroid');
-  if (!mv || !btn) return;
-  var xr = false;
-  if (navigator.xr && navigator.xr.isSessionSupported) {
-    navigator.xr.isSessionSupported('immersive-ar').then(function(ok){ xr = ok; }).catch(function(){});
-  }
-  var orig = window.setAr;
-  window.setAr = function(item){
-    orig(item);
-    if (item && item.glb) { mv.src = item.glb; }
-  };
-  btn.addEventListener('click', function(e){
-    if (xr && mv.src && mv.canActivateAR) {
-      e.preventDefault();
-      try { mv.activateAR(); } catch (err) { location.href = btn.getAttribute('href'); }
-    }
-  });
-})();
 </script>
 </body>
 </html>
